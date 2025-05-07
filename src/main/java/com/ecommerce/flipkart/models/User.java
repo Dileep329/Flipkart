@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
-import org.modelmapper.internal.bytebuddy.dynamic.loading.InjectionClassLoader;
+
 
 
 import java.util.ArrayList;
@@ -34,7 +34,7 @@ public class User {
 
     @NotBlank
     @Size(max=50)
-    @Email
+    @Email(message = "Email is not valid")
     private String email;
 
     @NotBlank
@@ -72,6 +72,11 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "address_id")
     )
     List<Address> addressList=new ArrayList<>();
+
+    @ToString.Exclude
+    @OneToOne(mappedBy = "user", cascade = {CascadeType.MERGE, CascadeType.PERSIST},orphanRemoval = true)
+    private Cart cart;
+
 }
 
 

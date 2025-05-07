@@ -1,4 +1,4 @@
-package com.ecommerce.flipkart.security.jwt;
+package com.ecommerce.flipkart.security.request;
 
 public class LoginRequest {
     private String username;

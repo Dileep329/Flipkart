@@ -12,10 +12,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/api")
 public class CategoryController {
 
     private CategoryService categoryService;
-    @GetMapping("/api/public/categories")
+    @GetMapping("/public/categories")
     public ResponseEntity<CategoryResponse> getAllCategories(@RequestParam (name = "pageNumber",defaultValue = AppConstants.PAGE_NUMBER,required = false) Integer pageNumber,
                                                        @RequestParam (name = "pageSize",defaultValue = AppConstants.PAGE_SIZE,required = false) Integer pageSize,
                                                        @RequestParam (name = "sortBy",defaultValue = AppConstants.SORT_CATEGORIES_BY,required = false)String sortBy,
@@ -24,17 +25,17 @@ public class CategoryController {
         return new ResponseEntity<>(categoryResponse, HttpStatus.OK);
 
     }
-    @PostMapping("/api/admin/createCategory")
+    @PostMapping("/admin/createCategory")
     public ResponseEntity<CategoryDTO> createCategory(@Valid @RequestBody CategoryDTO categoryDTO){
         CategoryDTO savedCategory = categoryService.saveCategory(categoryDTO);
         return new ResponseEntity<>(savedCategory,HttpStatus.CREATED);
     }
-    @DeleteMapping("/api/admin/category/{categoryId}")
+    @DeleteMapping("/admin/category/{categoryId}")
     public ResponseEntity<CategoryDTO> deleteCategory(@PathVariable Long categoryId){
         CategoryDTO deletedCategory=categoryService.deleteCategory(categoryId);
         return new ResponseEntity<>(deletedCategory,HttpStatus.OK);
     }
-    @PutMapping("/api/admin/updateCategory/{categoryId}")
+    @PutMapping("/admin/updateCategory/{categoryId}")
     public ResponseEntity<CategoryDTO> updateCategory(@Valid @RequestBody CategoryDTO categoryDTO,@PathVariable Long categoryId){
         CategoryDTO updatedCategory = categoryService.updateCategory(categoryDTO, categoryId);
         return new ResponseEntity<>(updatedCategory,HttpStatus.OK);

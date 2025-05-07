@@ -24,6 +24,7 @@ public class CategoryServiceImpl implements CategoryService{
     @Autowired
     private CategoryRepository categoryRepository;
 
+    @Autowired
     private ModelMapper modelMapper;
 
     @Override
@@ -76,6 +77,5 @@ public class CategoryServiceImpl implements CategoryService{
         savedCategory.setCategoryName(updatedCategory.getCategoryName());
         return categoryDTO;
     }
-
 
 }

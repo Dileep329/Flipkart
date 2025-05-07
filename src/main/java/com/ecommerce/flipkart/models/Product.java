@@ -7,6 +7,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -20,13 +23,13 @@ public class Product {
 
 
     @NotBlank
-    @Size(min = 3,message = "Product name must contain atleast 3 characters")
+    @Size(min = 3,message = "Product name must contain least 3 characters")
     private String productName;
     private String image;
 
 
     @NotBlank
-    @Size(min = 6,message = "Product name must contain atleast 3 characters")
+    @Size(min = 6,message = "Product name must contain least 3 characters")
     private String description;
     private Integer quantity;
     private double price;
@@ -34,11 +37,14 @@ public class Product {
     private double discount;
 
     @ManyToOne
-    @JoinColumn(name="category_id")
+    @JoinColumn(name="category_Name")
     private Category category;
 
     @ManyToOne
     @JoinColumn(name = "seller_id")
     private User user;
+
+    @OneToMany(mappedBy = "product",cascade = {CascadeType.PERSIST,CascadeType.MERGE},fetch=FetchType.EAGER)
+    private List<CartItem> products=new ArrayList<>();
 
 }

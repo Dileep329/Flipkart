@@ -7,19 +7,24 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
- @RequestMapping("/users")
 public class UserController {
 
     @Autowired
     UserService userService;
 
-    @PostMapping("/createUser")
-    public String createUser(@RequestBody User user){
-       return userService.createUser(user);
-    }
 
     @GetMapping("/test")
     public String test(){
         return "User is able to access this controller";
+    }
+
+    @GetMapping("/testAdmin")
+    public String adminTest(){
+        return "Admin is able to access this controller";
+    }
+
+    @GetMapping("/testSeller")
+    public String sellerTest(){
+        return "Seller is able to access this controller";
     }
 }

@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 @Data
 // It makes the seamless connection between the User of your application and the Security
 public class UserDetailsImpl implements UserDetails {
+
     private static final long serialVersionID=1L;
 
     @Getter
